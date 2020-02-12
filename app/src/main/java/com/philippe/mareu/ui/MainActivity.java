@@ -1,8 +1,10 @@
-package com.philippe.mareu;
+package com.philippe.mareu.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.philippe.mareu.R;
 
 public class MainActivity extends AppCompatActivity {
 
