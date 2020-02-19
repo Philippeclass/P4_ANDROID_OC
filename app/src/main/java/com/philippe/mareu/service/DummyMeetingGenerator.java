@@ -21,7 +21,7 @@ public abstract class DummyMeetingGenerator {
     );
 
 
-    static List<Meeting> generateNeighbours() {
+    static List<Meeting> generateMeetings() {
         return new ArrayList<>(DUMMY_MEETING);
     }
 
