@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,13 +18,15 @@ import androidx.fragment.app.DialogFragment;
 
 import com.philippe.mareu.R;
 
+import java.util.Date;
+
 public class AddMeetingDialogFragment extends DialogFragment {
 
     private EditText mMeetingEdit;
     private EditText mEntrantEdit;
     private Button mOkButton;
-    private NumberPicker mHourPicker;
-    private  NumberPicker mMinutesPicker;
+    private DatePicker mDatePicker;
+    private TimePicker mTimePicker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,11 +57,6 @@ public class AddMeetingDialogFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //Set pickers
-        mMinutesPicker.setMinValue(0);
-        mMinutesPicker.setMaxValue(50);
-        mHourPicker.setMinValue(0);
-        mHourPicker.setMaxValue(23);
 
     }
 

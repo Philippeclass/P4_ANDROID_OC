@@ -1,32 +1,32 @@
 package com.philippe.mareu.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.philippe.mareu.R;
 
+import butterknife.BindView;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
 
+    @BindView(R.id.btn_add_meeting)
+    public FloatingActionButton mFloatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FloatingActionButton mFab = findViewById(R.id.btn_add_meeting);
-
-        mRecyclerView = findViewById(R.id.recyclerView_meeting);
-
+        MeetingFragment meetingFragment = new MeetingFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, meetingFragment).commit();
 
 
     }
+
+
 
 
 

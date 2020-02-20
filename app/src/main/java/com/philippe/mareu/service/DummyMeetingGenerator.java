@@ -4,6 +4,7 @@ import com.philippe.mareu.model.Meeting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public abstract class DummyMeetingGenerator {
@@ -12,11 +13,9 @@ public abstract class DummyMeetingGenerator {
 
 
 
-    new Meeting(1,160, "Salle 1", "Paech", "Mals","Vlue" ),
-    new Meeting(1,160, "Salle 1", "Paech", "Mals","Vlue"),
-    new Meeting(1,160, "Salle 1", "Paech", "Mals","Vlue")
-
-
+    new Meeting(1, Calendar.getInstance().getTime(), "Salle A", "Paech", "Mals","Vlue" ),
+    new Meeting(1,Calendar.getInstance().getTime(), "Salle B", "Paech", "Mals","Vlue"),
+    new Meeting(1,Calendar.getInstance().getTime(), "Salle C", "Paech", "Mals","Vlue")
 
     );
 

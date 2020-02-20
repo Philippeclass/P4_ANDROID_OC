@@ -1,6 +1,7 @@
 package com.philippe.mareu.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Meeting implements Serializable {
 
@@ -13,7 +14,7 @@ public class Meeting implements Serializable {
     /**
      * Time
      */
-    private Integer time;
+    private Date date;
 
     /**
      * Place
@@ -40,16 +41,16 @@ public class Meeting implements Serializable {
      * Constructor
      *
      * @param id
-     * @param time
+     * @param date
      * @param place
      * @param subject
      * @param entrantMail
      * @param avatarColor
      */
-    public Meeting(Integer id, Integer time, String place, String subject, String entrantMail, String avatarColor
+    public Meeting(Integer id, Date date, String place, String subject, String entrantMail, String avatarColor
     ) {
         this.id = id;
-        this.time = time;
+        this.date = date;
         this.place = place;
         this.subject = subject;
         this.entrantMail = entrantMail;
@@ -64,11 +65,9 @@ public class Meeting implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    public Integer getTtime() {
-        return time;
-    }
-    public void setTime(Integer time) {
-        this.time = time;
+    public Date getDate() { return date; }
+    public void setDate(Integer time) {
+        this.date = date;
     }
     public String getPlace() { return place; }
     public void setPlace(String place) { this.place = place; }
