@@ -15,7 +15,7 @@ import java.util.List;
          *
          * @return {@link List}
          */
-        List<Meeting> getMeetings();
+        List<Meeting>getMeetings();
 
 
         /**

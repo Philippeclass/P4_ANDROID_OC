@@ -27,6 +27,7 @@ public class MeetingFragment extends Fragment {
     private MeetingApiService mApiService;
     private List<Meeting> mMeetings;
     private RecyclerView mRecyclerView;
+    private MeetingRecyclerViewAdapter mAdapter;
 
     /**
      * Create and return a new instance
@@ -57,7 +58,8 @@ public class MeetingFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
-        initList();
+
+        //initList();
         return view;
 
     }
@@ -70,7 +72,9 @@ public class MeetingFragment extends Fragment {
             mMeetings = mApiService.getMeetings();
 
 
-        //mRecyclerView.setAdapter(new MeetingRecyclerViewAdapter(mMeetings));
+        mRecyclerView.setAdapter(new MeetingRecyclerViewAdapter(mMeetings));
+
+
 
     }
 

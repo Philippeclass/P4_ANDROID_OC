@@ -26,7 +26,6 @@ import butterknife.ButterKnife;
 public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecyclerViewAdapter.ViewHolder> {
 
 
-
     private final List<Meeting> mMeetings;
 
     public MeetingRecyclerViewAdapter(List<Meeting> items) {
