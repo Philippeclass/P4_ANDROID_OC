@@ -10,6 +10,11 @@ public class Meeting implements Serializable {
      * Identifier
      */
     private Integer id;
+    /**
+     *  name
+     */
+    private String name;
+
 
     /**
      * Time
@@ -47,9 +52,10 @@ public class Meeting implements Serializable {
      * @param entrantMail
      * @param avatarColor
      */
-    public Meeting(Integer id, Date date, String place, String subject, String entrantMail, String avatarColor
+    public Meeting(Integer id,String name, Date date, String place, String subject, String entrantMail, String avatarColor
     ) {
         this.id = id;
+        this.name = name;
         this.date = date;
         this.place = place;
         this.subject = subject;
@@ -65,10 +71,10 @@ public class Meeting implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+    public String getName() { return name; }
+    public void setName(String place) { this.name = name;}
     public Date getDate() { return date; }
-    public void setDate(Integer time) {
-        this.date = date;
-    }
+    public void setDate(Integer time) { this.date = date; }
     public String getPlace() { return place; }
     public void setPlace(String place) { this.place = place; }
     public String getSubject() { return subject; }

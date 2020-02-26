@@ -13,9 +13,9 @@ public abstract class DummyMeetingGenerator {
 
 
 
-    new Meeting(1, Calendar.getInstance().getTime(), "Salle A", "Paech", "Mals","Vlue" ),
-    new Meeting(1,Calendar.getInstance().getTime(), "Salle B", "Paech", "Mals","Vlue"),
-    new Meeting(1,Calendar.getInstance().getTime(), "Salle C", "Paech", "Mals","Vlue")
+    new Meeting(1, "Reunion", Calendar.getInstance().getTime(), "Salle A", "Paech", "Mals","Vlue" ),
+    new Meeting(2, "Reunion",Calendar.getInstance().getTime(), "Salle B", "Paech", "Mals","Vlue"),
+    new Meeting(3,"Reunion",Calendar.getInstance().getTime(), "Salle C", "Paech", "Mals","Vlue")
 
     );
 
