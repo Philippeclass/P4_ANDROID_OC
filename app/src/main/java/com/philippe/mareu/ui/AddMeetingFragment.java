@@ -43,8 +43,7 @@ public class AddMeetingFragment extends AppCompatActivity {
 
     public Drawable mStarWhite;
 
-    @BindView(R.id.avatar_img)
-    ImageView mAvatarImg;
+
 
     Meeting mMeeting;
 
@@ -60,7 +59,7 @@ public class AddMeetingFragment extends AppCompatActivity {
         ButterKnife.bind(this);
         mMeetingApiService = DI.getMeetingApiService();
         mMeeting = (Meeting) getIntent().getSerializableExtra(BUNDLE_EXTRA_NEIGHBOUR);
-        Glide.with(this).load(mMeeting.getAvatarColor()).into(mAvatarImg);
+
 
 
 
