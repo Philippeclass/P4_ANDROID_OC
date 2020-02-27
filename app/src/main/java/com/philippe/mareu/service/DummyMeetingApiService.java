@@ -24,6 +24,8 @@ public class DummyMeetingApiService implements MeetingApiService  {
 
 
 
+
+
         /**
          * {@inheritDoc}
          */
@@ -32,8 +34,13 @@ public class DummyMeetingApiService implements MeetingApiService  {
             meetings.remove(meeting);
         }
 
-
+    @Override
+    public void addMeeting(Meeting meeting) {
+        meetings.add(meeting);
     }
+
+
+}
 
 
 

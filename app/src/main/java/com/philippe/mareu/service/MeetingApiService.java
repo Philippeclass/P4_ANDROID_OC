@@ -26,6 +26,9 @@ import java.util.List;
         void deleteMeeting(Meeting meeting);
 
 
+        void addMeeting(Meeting meeting);
+
+
     }
 
 

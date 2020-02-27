@@ -2,6 +2,7 @@ package com.philippe.mareu.ui;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -23,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.container)
     ViewPager mViewPager;
     @BindView(R.id.btn_add_meeting)
-    public FloatingActionButton mFloatingActionButton;
-    public static final String BUNDLE_EXTRA_NEIGHBOUR = "BUNDLE_EXTRA_NEIGHBOUR";
+    public FloatingActionButton mAddMeetingButton;
+    public static final String BUNDLE_EXTRA_MEETING = "BUNDLE_EXTRA_MEETING";
 
 
     @Override

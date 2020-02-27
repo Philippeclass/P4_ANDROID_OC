@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.philippe.mareu.R;
 import com.philippe.mareu.di.DI;
 import com.philippe.mareu.model.Meeting;
@@ -28,7 +29,7 @@ import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.philippe.mareu.ui.MainActivity.BUNDLE_EXTRA_NEIGHBOUR;
+import static com.philippe.mareu.ui.MainActivity.BUNDLE_EXTRA_MEETING;
 
 public class AddMeetingFragment extends AppCompatActivity {
 
@@ -38,12 +39,8 @@ public class AddMeetingFragment extends AppCompatActivity {
     private DatePicker mDatePicker;
     private TimePicker mTimePicker;
 
-
-
-
-    public Drawable mStarWhite;
-
-
+    @BindView(R.id.btn_add_meeting)
+    public FloatingActionButton mAddMeetingButton;
 
     Meeting mMeeting;
 
@@ -58,9 +55,7 @@ public class AddMeetingFragment extends AppCompatActivity {
         setContentView(R.layout.create_meeting_fragment);
         ButterKnife.bind(this);
         mMeetingApiService = DI.getMeetingApiService();
-        mMeeting = (Meeting) getIntent().getSerializableExtra(BUNDLE_EXTRA_NEIGHBOUR);
-
-
+        mMeeting = (Meeting) getIntent().getSerializableExtra(BUNDLE_EXTRA_MEETING);
 
 
 

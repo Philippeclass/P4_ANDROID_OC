@@ -33,9 +33,9 @@ public class MeetingFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private MeetingRecyclerViewAdapter mAdapter;
 
-    @BindView(R.id.btn_add_meeting)
-    public FloatingActionButton mFloatingActionButton;
 
+    @BindView(R.id.btn_add_meeting)
+    public FloatingActionButton mAddMeetingButton;
 
     /**
      * Create and return a new instance
@@ -127,6 +127,16 @@ public class MeetingFragment extends Fragment {
     @Subscribe
     public void onDeleteMeeting(DeleteMeetingEvent event) {
         mApiService.deleteMeeting(event.meeting);
+        initList();
+    }
+    /**
+     * Fired if the user clicks on a delete button
+     *
+     * @param event
+     */
+    @Subscribe
+    public void onDAddMeeting(DeleteMeetingEvent event) {
+        mApiService.addMeeting(event.meeting);
         initList();
     }
 
