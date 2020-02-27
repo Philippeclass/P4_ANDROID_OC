@@ -1,6 +1,8 @@
 package com.philippe.mareu.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Meeting implements Serializable {
@@ -65,6 +67,15 @@ public class Meeting implements Serializable {
 
     }
 
+    public StringBuilder getTimeFormated() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        StringBuilder time = new StringBuilder(dateFormat.format(this.date));
+        return time;
+
+    }
+
+
+
     public Integer getId() {
         return id;
     }
@@ -74,7 +85,7 @@ public class Meeting implements Serializable {
     public String getName() { return name; }
     public void setName(String place) { this.name = name;}
     public Date getDate() { return date; }
-    public void setDate(Integer time) { this.date = date; }
+    public void setDate(Date time) { this.date = date; }
     public String getPlace() { return place; }
     public void setPlace(String place) { this.place = place; }
     public String getSubject() { return subject; }

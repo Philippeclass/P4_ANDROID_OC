@@ -48,10 +48,8 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Meeting meeting = mMeetings.get(position);
-        Glide.with(holder.mMeetingColor.getContext())
-                .load(meeting.getAvatarColor())
-                .apply(RequestOptions.circleCropTransform())
-                .into(holder.mMeetingColor);
+        holder.mMeetingName.setText(meeting.getName()+ " - " + meeting.getEntrantMail() + " - " + meeting.getTimeFormated() ) ;
+
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,16 +58,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
             }
         });
 
-       holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(holder.itemView.getContext(), AddMeetingFragment.class);
-                intent.putExtra(BUNDLE_EXTRA_MEETING, meeting);
-                holder.itemView.getContext().startActivity(intent);
-
-            }
-        });
 /**
         holder.mAddMeetingButton.setOnClickListener(new View.OnClickListener() {
             @Override

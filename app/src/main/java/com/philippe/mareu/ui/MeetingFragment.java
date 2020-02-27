@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.philippe.mareu.R;
 import com.philippe.mareu.di.DI;
+import com.philippe.mareu.events.AddMeetingEvent;
 import com.philippe.mareu.events.DeleteMeetingEvent;
 import com.philippe.mareu.model.Meeting;
 import com.philippe.mareu.service.MeetingApiService;
@@ -107,10 +108,11 @@ public class MeetingFragment extends Fragment {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
+        super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
 
 
     @Override
@@ -135,7 +137,7 @@ public class MeetingFragment extends Fragment {
      * @param event
      */
     @Subscribe
-    public void onDAddMeeting(DeleteMeetingEvent event) {
+    public void onAddMeeting(AddMeetingEvent event) {
         mApiService.addMeeting(event.meeting);
         initList();
     }

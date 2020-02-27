@@ -25,8 +25,12 @@ import androidx.fragment.app.DialogFragment;
 import com.bumptech.glide.Glide;
 import com.philippe.mareu.R;
 import com.philippe.mareu.di.DI;
+import com.philippe.mareu.events.AddMeetingEvent;
+import com.philippe.mareu.events.DeleteMeetingEvent;
 import com.philippe.mareu.model.Meeting;
 import com.philippe.mareu.service.MeetingApiService;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,7 +46,8 @@ public class AddMeetingFragment extends AppCompatActivity {
 
     private EditText mMeetingEdit;
     private EditText mEntrantEdit;
-    private Button mOkButton;
+    @BindView(R.id.confirm_button)
+     Button mOkButton;
     private DatePicker mDatePicker;
     private TimePicker mTimePicker;
     EditText date_in;
@@ -54,6 +59,7 @@ public class AddMeetingFragment extends AppCompatActivity {
     MeetingApiService mMeetingApiService;
 
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +67,15 @@ public class AddMeetingFragment extends AppCompatActivity {
         ButterKnife.bind(this);
         mMeetingApiService = DI.getMeetingApiService();
         mMeeting = (Meeting) getIntent().getSerializableExtra(BUNDLE_EXTRA_MEETING);
+        mOkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Meeting meeting =   new Meeting(1, "Marteau", Calendar.getInstance().getTime(), "Salle A", "Paech", "Mals","Vlue" );
+                EventBus.getDefault().post(new AddMeetingEvent(meeting));
+            }
+        });
+
+
 
         date_time_in = findViewById(R.id.date_time_input);
 
@@ -103,8 +118,6 @@ public class AddMeetingFragment extends AppCompatActivity {
         new DatePickerDialog(AddMeetingFragment.this, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 
     }
-
-
 
 
 }

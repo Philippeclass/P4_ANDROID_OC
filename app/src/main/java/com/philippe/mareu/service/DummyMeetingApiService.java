@@ -24,8 +24,6 @@ public class DummyMeetingApiService implements MeetingApiService  {
 
 
 
-
-
         /**
          * {@inheritDoc}
          */
