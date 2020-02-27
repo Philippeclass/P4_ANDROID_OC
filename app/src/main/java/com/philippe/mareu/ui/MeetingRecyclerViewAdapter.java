@@ -70,7 +70,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
             }
         });
-
+/**
         holder.mAddMeetingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +78,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
             }
         });
 
-
+**/
     }
 
 
@@ -94,9 +94,11 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         public TextView mMeetingName;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
+
+        /**
         @BindView(R.id.btn_add_meeting)
         public ImageButton mAddMeetingButton;
-
+**/
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
