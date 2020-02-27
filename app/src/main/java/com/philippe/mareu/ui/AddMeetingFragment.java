@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,9 +16,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.philippe.mareu.R;
 
-import java.util.Date;
-
-public class AddMeetingDialogFragment extends DialogFragment {
+public class AddMeetingFragment extends DialogFragment {
 
     private EditText mMeetingEdit;
     private EditText mEntrantEdit;
@@ -36,8 +32,7 @@ public class AddMeetingDialogFragment extends DialogFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.dialog_fragment, container);
+        return inflater.inflate(R.layout.create_meeting_fragment, container);
     }
 
 

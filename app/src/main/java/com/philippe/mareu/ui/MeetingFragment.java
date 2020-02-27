@@ -7,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.philippe.mareu.R;
 import com.philippe.mareu.di.DI;
 import com.philippe.mareu.events.DeleteMeetingEvent;
@@ -22,12 +24,18 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
+import butterknife.BindView;
+
 public class MeetingFragment extends Fragment {
 
     private MeetingApiService mApiService;
     private List<Meeting> mMeetings;
     private RecyclerView mRecyclerView;
     private MeetingRecyclerViewAdapter mAdapter;
+
+    @BindView(R.id.btn_add_meeting)
+    public FloatingActionButton mFloatingActionButton;
+
 
     /**
      * Create and return a new instance
@@ -52,11 +60,20 @@ public class MeetingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_fragment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
         Context context = view.getContext();
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction frag = getFragmentManager().beginTransaction();
+                frag.replace(R.id.btn_add_meeting, new AddMeetingFragment());
+                frag.commit();
+            }
+        });
+
 
 
         //initList();
