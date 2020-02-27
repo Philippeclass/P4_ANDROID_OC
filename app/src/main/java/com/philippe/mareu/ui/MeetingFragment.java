@@ -65,14 +65,18 @@ public class MeetingFragment extends Fragment {
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+/**
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 FragmentTransaction frag = getFragmentManager().beginTransaction();
                 frag.replace(R.id.btn_add_meeting, new AddMeetingFragment());
                 frag.commit();
             }
         });
+
+**/
 
 
 

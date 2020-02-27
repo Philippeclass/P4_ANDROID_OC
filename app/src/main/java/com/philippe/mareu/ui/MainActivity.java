@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager mViewPager;
     @BindView(R.id.btn_add_meeting)
     public FloatingActionButton mFloatingActionButton;
+    public static final String BUNDLE_EXTRA_NEIGHBOUR = "BUNDLE_EXTRA_NEIGHBOUR";
 
 
     @Override

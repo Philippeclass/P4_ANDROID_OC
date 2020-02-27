@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.philippe.mareu.R;
 import com.philippe.mareu.events.DeleteMeetingEvent;
 import com.philippe.mareu.model.Meeting;
@@ -23,10 +24,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.philippe.mareu.ui.MainActivity.BUNDLE_EXTRA_NEIGHBOUR;
+
 public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecyclerViewAdapter.ViewHolder> {
 
 
     private final List<Meeting> mMeetings;
+    @BindView(R.id.btn_add_meeting)
+    public FloatingActionButton mFloatingActionButton;
 
     public MeetingRecyclerViewAdapter(List<Meeting> items) {
         mMeetings = items;
@@ -42,11 +47,26 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Meeting meeting = mMeetings.get(position);
+        Glide.with(holder.mMeetingColor.getContext())
+                .load(meeting.getAvatarColor())
+                .apply(RequestOptions.circleCropTransform())
+                .into(holder.mMeetingColor);
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(holder.itemView.getContext(), AddMeetingFragment.class);
+                intent.putExtra(BUNDLE_EXTRA_NEIGHBOUR, meeting);
+                holder.itemView.getContext().startActivity(intent);
+
             }
         });
 
@@ -61,9 +81,9 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_list_avatar)
-        public ImageView mNeighbourAvatar;
+        public ImageView mMeetingColor;
         @BindView(R.id.item_list_name)
-        public TextView mNeighbourName;
+        public TextView mMeetingName;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
 
