@@ -12,9 +12,9 @@ public abstract class DummyMeetingGenerator {
     public static List<Meeting> DUMMY_MEETING = Arrays.asList(
 
 
-    new Meeting(1, "Reunion", Calendar.getInstance().getTime(), "Salle A", "Paech", "Mals","Vlue" ),
-    new Meeting(2, "Reunion",Calendar.getInstance().getTime(), "Salle B", "Paech", "Mals","Vlue"),
-    new Meeting(3,"Reunion",Calendar.getInstance().getTime(), "Salle C", "Paech", "Mals","Vlue")
+    new Meeting(1, "Reunion A", Calendar.getInstance().getTime(), "Salle A", "Paech", "Mals","Vlue" ),
+    new Meeting(2, "Reunion B",Calendar.getInstance().getTime(), "Salle B", "Mario", "Mals","Vlue"),
+    new Meeting(3,"Reunion C",Calendar.getInstance().getTime(), "Salle C", "Luigi", "Mals","Vlue")
 
     );
 
