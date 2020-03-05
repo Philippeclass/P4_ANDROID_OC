@@ -2,6 +2,7 @@ package com.philippe.mareu.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
@@ -29,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String BUNDLE_EXTRA_MEETING = "BUNDLE_EXTRA_MEETING";
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         MeetingFragment meetingFragment = new MeetingFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.container, meetingFragment).commit();
 
-        mAddMeetingButton  = findViewById(R.id.btn_add_meeting);
+        mAddMeetingButton = findViewById(R.id.btn_add_meeting);
         mAddMeetingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,20 +53,19 @@ public class MainActivity extends AppCompatActivity {
 
 
         /**
-        FragmentTransaction fragmentTransaction  = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.container, new Fragment());
-        fragmentTransaction.commit();
+         FragmentTransaction fragmentTransaction  = getSupportFragmentManager().beginTransaction();
+         fragmentTransaction.add(R.id.container, new Fragment());
+         fragmentTransaction.commit();
          **/
-
-
 
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+         super.onCreateOptionsMenu(menu);
+         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+         return true;
 
-
-
-
-
-
+    }
 }

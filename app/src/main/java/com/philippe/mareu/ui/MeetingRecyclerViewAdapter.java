@@ -48,7 +48,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Meeting meeting = mMeetings.get(position);
-        holder.mMeetingName.setText(meeting.getName()+ " - " + meeting.getEntrantMail() + " - " + meeting.getTimeFormated() ) ;
+        holder.mMeetingName.setText(meeting.getName() + " - " + meeting.getEntrantMail() + " - " + meeting.getTimeFormated());
 
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
@@ -59,14 +59,12 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         });
 
 /**
-        holder.mAddMeetingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EventBus.getDefault().post(new AddMeetingEvent(meeting));
-            }
-        });
-
-**/
+ holder.mAddMeetingButton.setOnClickListener(new View.OnClickListener() {
+@Override public void onClick(View v) {
+EventBus.getDefault().post(new AddMeetingEvent(meeting));
+}
+});
+ **/
     }
 
 
@@ -84,23 +82,13 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         public ImageButton mDeleteButton;
 
         /**
-        @BindView(R.id.btn_add_meeting)
-        public ImageButton mAddMeetingButton;
-**/
+         * @BindView(R.id.btn_add_meeting) public ImageButton mAddMeetingButton;
+         **/
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
     }
-
-
-
-
-
-
-
-
-
 
 
 }

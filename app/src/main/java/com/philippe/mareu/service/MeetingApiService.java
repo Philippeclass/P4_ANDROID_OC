@@ -1,21 +1,26 @@
 package com.philippe.mareu.service;
 
 import com.philippe.mareu.model.Meeting;
+import com.philippe.mareu.model.Place;
 
 import java.util.List;
 
 
     /**
-     * Neighbour API client
+     * Meetingr API client
      */
     public interface MeetingApiService {
 
         /**
-         * Get all my Neighbours
+         * Get all my Meetings
          *
          * @return {@link List}
          */
         List<Meeting>getMeetings();
+
+
+
+        List<Place>getPlaces();
 
 
         /**

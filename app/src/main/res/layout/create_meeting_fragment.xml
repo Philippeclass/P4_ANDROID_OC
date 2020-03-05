@@ -2,36 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.AddMeetingFragment">
 
     <EditText
-        android:hint="Select meeting name"
         android:id="@+id/name_input"
-        android:inputType="none"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-
-    <EditText
-        android:hint="Select meeting place"
-        android:id="@+id/place_input"
-        android:inputType="none"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <EditText
-        android:hint="Select Date and Time"
-        android:id="@+id/date_time_input"
-        android:inputType="none"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Select meeting name"
+        android:inputType="none" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select meeting place" />
+
+    <GridView
+        android:id="@+id/place_input"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:numColumns="3"
+        android:hint="Select meeting place"
+        android:inputType="none" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Entrants"
+        android:inputType="none" />
+
+
+    <TextView
+        android:id="@+id/date_time_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select Date and Time"
+        android:inputType="none" />
+
+    <Button
         android:id="@+id/confirm_button"
-        android:hint="Confirm"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirm" />
 
 </LinearLayout>

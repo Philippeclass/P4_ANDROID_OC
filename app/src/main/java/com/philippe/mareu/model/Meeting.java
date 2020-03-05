@@ -3,6 +3,7 @@ package com.philippe.mareu.model;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 
 public class Meeting implements Serializable {
@@ -42,7 +43,7 @@ public class Meeting implements Serializable {
     /**
      * AvatarColor
      */
-    private String avatarColor;
+
 
     /**
      * Constructor
@@ -50,22 +51,28 @@ public class Meeting implements Serializable {
      * @param id
      * @param date
      * @param place
-     * @param subject
+
      * @param entrantMail
-     * @param avatarColor
+
      */
-    public Meeting(Integer id,String name, Date date, String place, String subject, String entrantMail, String avatarColor
+    public Meeting(Integer id,String name, Date date, String place, String entrantMail
     ) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.place = place;
-        this.subject = subject;
         this.entrantMail = entrantMail;
-        this.avatarColor = avatarColor;
-
 
     }
+
+
+    public static final Comparator<Meeting> fromAtoZ = new Comparator<Meeting>() {
+        @Override
+        public int compare(Meeting m1, Meeting m2) {
+            return m1.subject.compareTo(m2.subject);
+        }
+    };
+
 
     public StringBuilder getTimeFormated() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
@@ -92,10 +99,7 @@ public class Meeting implements Serializable {
     public void setSubject(String subject) { this.subject = subject; }
     public String getEntrantMail() { return entrantMail; }
     public void setEntrantMails(String entrantMail) { this.entrantMail = entrantMail; }
-    public String getAvatarColor() {
-        return avatarColor;
-    }
-    public void setAvatarColor(String avatarColor) { this.avatarColor = avatarColor; }
+
 
 
 }

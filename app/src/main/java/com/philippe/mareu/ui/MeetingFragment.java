@@ -2,10 +2,14 @@ package com.philippe.mareu.ui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -23,6 +27,7 @@ import com.philippe.mareu.service.MeetingApiService;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -56,7 +61,11 @@ public class MeetingFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApiService = DI.getMeetingApiService();
+        setHasOptionsMenu(true);
+
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,39 +76,61 @@ public class MeetingFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 /**
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+ mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+@Override public void onClick(View v) {
 
-                FragmentTransaction frag = getFragmentManager().beginTransaction();
-                frag.replace(R.id.btn_add_meeting, new AddMeetingFragment());
-                frag.commit();
-            }
-        });
+FragmentTransaction frag = getFragmentManager().beginTransaction();
+frag.replace(R.id.btn_add_meeting, new AddMeetingFragment());
+frag.commit();
+}
+});
+ **/
 
-**/
+/**
+ mSortButton.setOnClickListener(new View.OnClickListener() {
+@Override public void onClick(View v) {
+sortFromAToZ();
 
-
-
+}
+});
+ **/
         //initList();
         return view;
 
     }
+/**
+ public void sortFromAToZ() {
+ Collections.sort(mApiService.getMeetings(), Meeting.fromAtoZ);
+ initList();
+
+ }
+ **/
 
     /**
      * Init the List of neighbours
      */
     private void initList() {
 
-            mMeetings = mApiService.getMeetings();
-
-
+        mMeetings = mApiService.getMeetings();
         mRecyclerView.setAdapter(new MeetingRecyclerViewAdapter(mMeetings));
-
 
 
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+            case R.id.sort_By_Date:
+                Log.d("message", "test");
+                return true;
+            case R.id.sort_By_Place:
+                Log.d("message2", "test2");
+                return true;
+            default:return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public void onStart() {
@@ -112,7 +143,6 @@ public class MeetingFragment extends Fragment {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-
 
 
     @Override
@@ -131,6 +161,7 @@ public class MeetingFragment extends Fragment {
         mApiService.deleteMeeting(event.meeting);
         initList();
     }
+
     /**
      * Fired if the user clicks on a delete button
      *
@@ -141,7 +172,6 @@ public class MeetingFragment extends Fragment {
         mApiService.addMeeting(event.meeting);
         initList();
     }
-
 
 
 }

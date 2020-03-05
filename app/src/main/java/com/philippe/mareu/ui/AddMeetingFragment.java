@@ -44,20 +44,22 @@ import static com.philippe.mareu.ui.MainActivity.BUNDLE_EXTRA_MEETING;
 
 public class AddMeetingFragment extends AppCompatActivity {
 
-    private EditText mMeetingEdit;
+
+
+    @BindView(R.id.name_input)
+     EditText mMeetingEdit;
     private EditText mEntrantEdit;
     @BindView(R.id.confirm_button)
-     Button mOkButton;
+    Button mOkButton;
     private DatePicker mDatePicker;
     private TimePicker mTimePicker;
     EditText date_in;
     EditText time_in;
-    EditText date_time_in;
+    TextView date_time_in;
 
     Meeting mMeeting;
 
     MeetingApiService mMeetingApiService;
-
 
 
     @Override
@@ -70,11 +72,10 @@ public class AddMeetingFragment extends AppCompatActivity {
         mOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Meeting meeting =   new Meeting(1, "Marteau", Calendar.getInstance().getTime(), "Salle A", "Paech", "Mals","Vlue" );
+                Meeting meeting = new Meeting(1, mMeetingEdit.getText().toString(), Calendar.getInstance().getTime(), "Salle A", "Paech");
                 EventBus.getDefault().post(new AddMeetingEvent(meeting));
             }
         });
-
 
 
         date_time_in = findViewById(R.id.date_time_input);
@@ -90,7 +91,7 @@ public class AddMeetingFragment extends AppCompatActivity {
         });
     }
 
-    private void showDateTimeDialog(final EditText date_time_in) {
+    private void showDateTimeDialog(final TextView date_time_in) {
         final Calendar calendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
