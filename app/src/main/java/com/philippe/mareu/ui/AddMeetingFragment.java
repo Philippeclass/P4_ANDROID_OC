@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -48,7 +49,10 @@ public class AddMeetingFragment extends AppCompatActivity {
 
     @BindView(R.id.name_input)
      EditText mMeetingEdit;
-    private EditText mEntrantEdit;
+    @BindView(R.id.entrants_input)
+    EditText mEntrantEdit;
+    @BindView(R.id.place_input)
+    GridView mGridView;
     @BindView(R.id.confirm_button)
     Button mOkButton;
     private DatePicker mDatePicker;
@@ -72,7 +76,7 @@ public class AddMeetingFragment extends AppCompatActivity {
         mOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Meeting meeting = new Meeting(1, mMeetingEdit.getText().toString(), Calendar.getInstance().getTime(), "Salle A", "Paech");
+                Meeting meeting = new Meeting(1, mMeetingEdit.getText().toString(), Calendar.getInstance().getTime(), mGridView.toString(), mEntrantEdit.getText().toString());
                 EventBus.getDefault().post(new AddMeetingEvent(meeting));
             }
         });
