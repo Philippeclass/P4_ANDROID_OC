@@ -14,8 +14,13 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.philippe.mareu.R;
 import com.philippe.mareu.events.DeleteMeetingEvent;
+import com.philippe.mareu.model.Meeting;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_add_meeting)
     public FloatingActionButton mAddMeetingButton;
     public static final String BUNDLE_EXTRA_MEETING = "BUNDLE_EXTRA_MEETING";
+    private List<Meeting> mMeetingList;
 
 
     @Override
@@ -50,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
 
 
         /**

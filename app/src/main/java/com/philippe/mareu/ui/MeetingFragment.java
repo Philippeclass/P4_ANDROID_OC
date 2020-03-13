@@ -27,8 +27,14 @@ import com.philippe.mareu.service.MeetingApiService;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 
@@ -38,10 +44,13 @@ public class MeetingFragment extends Fragment {
     private List<Meeting> mMeetings;
     private RecyclerView mRecyclerView;
     private MeetingRecyclerViewAdapter mAdapter;
+    private Meeting mMeeting;
+
 
 
     @BindView(R.id.btn_add_meeting)
     public FloatingActionButton mAddMeetingButton;
+
 
     /**
      * Create and return a new instance
@@ -55,6 +64,7 @@ public class MeetingFragment extends Fragment {
         // pass BUNDLE variable in Fragment
         fragment.setArguments(args);
         return fragment;
+
     }
 
     @Override
@@ -75,16 +85,19 @@ public class MeetingFragment extends Fragment {
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-/**
- mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-@Override public void onClick(View v) {
 
-FragmentTransaction frag = getFragmentManager().beginTransaction();
-frag.replace(R.id.btn_add_meeting, new AddMeetingFragment());
-frag.commit();
-}
-});
- **/
+
+
+        /**
+         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View v) {
+
+        FragmentTransaction frag = getFragmentManager().beginTransaction();
+        frag.replace(R.id.btn_add_meeting, new AddMeetingFragment());
+        frag.commit();
+        }
+        });
+         **/
 
 /**
  mSortButton.setOnClickListener(new View.OnClickListener() {
@@ -117,20 +130,52 @@ sortFromAToZ();
 
     }
 
+    private void sortList() {
+        Collections.sort(mMeetings, new Comparator<Meeting>() {
+            @Override
+            public int compare(Meeting o1, Meeting o2) {
+                return o1.getDate().compareTo(o2.getDate());
+            }
+        });
+    }
+    public static void SortDates(List<String> dateList){
+        Collections.sort(dateList, new Comparator<String>() {
+            DateFormat mDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.FRANCE);
+            @Override
+            public int compare(String e1, String e2) {
+                try {
+                    return mDateFormat.parse(e1).compareTo(mDateFormat.parse(e2));
+                } catch (ParseException e) {
+                    throw  new IllegalArgumentException(e);
+                }
+            }
+        });
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.sort_By_Date:
+
                 Log.d("message", "test");
-                return true;
+sortList();
+
+//SortDates();
+
+            return true;
             case R.id.sort_By_Place:
                 Log.d("message2", "test2");
+
                 return true;
-            default:return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
+
+
+
 
     @Override
     public void onStart() {

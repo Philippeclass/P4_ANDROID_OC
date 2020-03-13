@@ -10,6 +10,7 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -17,11 +18,13 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.philippe.mareu.R;
@@ -29,12 +32,14 @@ import com.philippe.mareu.di.DI;
 import com.philippe.mareu.events.AddMeetingEvent;
 import com.philippe.mareu.events.DeleteMeetingEvent;
 import com.philippe.mareu.model.Meeting;
+import com.philippe.mareu.model.Place;
 import com.philippe.mareu.service.MeetingApiService;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindDrawable;
@@ -55,6 +60,12 @@ public class AddMeetingFragment extends AppCompatActivity {
     GridView mGridView;
     @BindView(R.id.confirm_button)
     Button mOkButton;
+
+    private MeetingApiService mApiService;
+    private List<Meeting> mMeetings;
+    private RecyclerView mRecyclerView;
+
+    private List<Place> mPlaces;
     private DatePicker mDatePicker;
     private TimePicker mTimePicker;
     EditText date_in;
@@ -73,6 +84,13 @@ public class AddMeetingFragment extends AppCompatActivity {
         ButterKnife.bind(this);
         mMeetingApiService = DI.getMeetingApiService();
         mMeeting = (Meeting) getIntent().getSerializableExtra(BUNDLE_EXTRA_MEETING);
+
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), "You chosed " + mPlaces[+position], Toast.LENGTH_SHORT).show();
+            }
+        });
         mOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +112,10 @@ public class AddMeetingFragment extends AppCompatActivity {
             }
         });
     }
+
+
+
+
 
     private void showDateTimeDialog(final TextView date_time_in) {
         final Calendar calendar = Calendar.getInstance();

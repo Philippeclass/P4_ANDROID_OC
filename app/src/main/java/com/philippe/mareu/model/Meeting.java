@@ -1,10 +1,15 @@
 package com.philippe.mareu.model;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Locale;
 
 public class Meeting implements Serializable {
 
@@ -66,12 +71,22 @@ public class Meeting implements Serializable {
     }
 
 
-    public static final Comparator<Meeting> fromAtoZ = new Comparator<Meeting>() {
+    public static final Comparator<Meeting> byDate= new Comparator<Meeting>() {
         @Override
         public int compare(Meeting m1, Meeting m2) {
-            return m1.subject.compareTo(m2.subject);
+            SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.FRANCE);
+            String dateStr1 = (m1.getDate().toString()+ " " + m1.getDate().toString()).toString() ;
+            String dateStr2 = (m2.getDate().toString()+ " " + m2.getDate().toString()).toString() ;
+
+            try {
+                return mSimpleDateFormat.parse(dateStr1).compareTo(mSimpleDateFormat.parse(dateStr2));
+            }catch (ParseException e){
+                throw new IllegalArgumentException(e);
+            }
         }
     };
+
+
 
 
     public StringBuilder getTimeFormated() {

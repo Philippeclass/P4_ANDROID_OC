@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import com.philippe.mareu.R;
 import com.philippe.mareu.events.AddMeetingEvent;
 import com.philippe.mareu.events.DeleteMeetingEvent;
 import com.philippe.mareu.model.Meeting;
+import com.philippe.mareu.model.Place;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -31,6 +34,10 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
 
     private final List<Meeting> mMeetings;
+    public EditText mEditText1;
+    public EditText mEditText2;
+
+
     @BindView(R.id.btn_add_meeting)
     public FloatingActionButton mFloatingActionButton;
 
@@ -44,6 +51,8 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
                 .inflate(R.layout.fragment_meeting, parent, false);
         return new ViewHolder(view);
     }
+
+
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
@@ -80,6 +89,7 @@ EventBus.getDefault().post(new AddMeetingEvent(meeting));
         public TextView mMeetingName;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
+
 
         /**
          * @BindView(R.id.btn_add_meeting) public ImageButton mAddMeetingButton;
