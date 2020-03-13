@@ -25,6 +25,20 @@ public class DummyMeetingApiService implements MeetingApiService {
     }
 
     @Override
+    public List<Meeting> sortByDates(String date) {
+        List<Meeting> meetingList = new ArrayList<>();
+        for (Meeting meeting : meetings) {
+            if (meeting.getDateFormated().equals(date)) {
+
+                meetingList.add(meeting);
+
+            }
+
+        }
+        return meetingList;
+    }
+
+    @Override
     public List<Place> getPlaces() {
         return places;
     }

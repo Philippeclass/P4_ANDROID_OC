@@ -3,6 +3,7 @@ package com.philippe.mareu.ui;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -60,6 +62,8 @@ public class AddMeetingFragment extends AppCompatActivity {
     GridView mGridView;
     @BindView(R.id.confirm_button)
     Button mOkButton;
+    @BindView(R.id.select_room_message)
+    TextView mSelect_room;
 
     private MeetingApiService mApiService;
     private List<Meeting> mMeetings;
@@ -76,6 +80,11 @@ public class AddMeetingFragment extends AppCompatActivity {
 
     MeetingApiService mMeetingApiService;
 
+String[] numberword = {"Peach", "Mario", "Luigi"};
+int[] numberImage = {R.drawable.ic_one, R.drawable.ic_two, R.drawable.ic_three};
+String selectedroom;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,17 +93,25 @@ public class AddMeetingFragment extends AppCompatActivity {
         ButterKnife.bind(this);
         mMeetingApiService = DI.getMeetingApiService();
         mMeeting = (Meeting) getIntent().getSerializableExtra(BUNDLE_EXTRA_MEETING);
+        //MainAdapter adapter = new MainAdapter(AddMeetingFragment.this, numberword, numberImage);
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,numberword);
+        mGridView.setAdapter(arrayAdapter);
+
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "You chosed " + mPlaces[+position], Toast.LENGTH_SHORT).show();
+                selectedroom = numberword[+position];
+                Toast.makeText(getApplicationContext(), "You choose " + numberword[+position], Toast.LENGTH_SHORT).show();
+                mSelect_room.setText("you have chosen " + numberword[+position]);
+
             }
         });
+
         mOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Meeting meeting = new Meeting(1, mMeetingEdit.getText().toString(), Calendar.getInstance().getTime(), mGridView.toString(), mEntrantEdit.getText().toString());
+                Meeting meeting = new Meeting(1, mMeetingEdit.getText().toString(), Calendar.getInstance().getTime(), selectedroom, mEntrantEdit.getText().toString());
                 EventBus.getDefault().post(new AddMeetingEvent(meeting));
             }
         });

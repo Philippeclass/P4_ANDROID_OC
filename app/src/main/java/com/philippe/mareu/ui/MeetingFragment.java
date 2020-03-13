@@ -1,5 +1,7 @@
 package com.philippe.mareu.ui;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,6 +35,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -45,7 +51,6 @@ public class MeetingFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private MeetingRecyclerViewAdapter mAdapter;
     private Meeting mMeeting;
-
 
 
     @BindView(R.id.btn_add_meeting)
@@ -74,6 +79,7 @@ public class MeetingFragment extends Fragment {
         setHasOptionsMenu(true);
 
 
+
     }
 
 
@@ -85,7 +91,6 @@ public class MeetingFragment extends Fragment {
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-
 
 
         /**
@@ -111,22 +116,44 @@ sortFromAToZ();
         return view;
 
     }
-/**
- public void sortFromAToZ() {
- Collections.sort(mApiService.getMeetings(), Meeting.fromAtoZ);
- initList();
 
- }
- **/
+    /**
+     * public void sortFromAToZ() {
+     * Collections.sort(mApiService.getMeetings(), Meeting.fromAtoZ);
+     * initList();
+     * }
+     **/
+
+    private void showDateTimeDialog() {
+        final Calendar calendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                Date date = calendar.getTime();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                initList(mApiService.sortByDates(simpleDateFormat.format(date)));
+
+
+
+            }
+        };
+
+        new DatePickerDialog(getContext(), dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+
+    }
+
 
     /**
      * Init the List of neighbours
      */
-    private void initList() {
+    private void initList(List<Meeting> meetings) {
 
-        mMeetings = mApiService.getMeetings();
-        mRecyclerView.setAdapter(new MeetingRecyclerViewAdapter(mMeetings));
+        //  mMeetings = mApiService.getMeetings();
 
+        mRecyclerView.setAdapter(new MeetingRecyclerViewAdapter(meetings));
 
     }
 
@@ -138,21 +165,22 @@ sortFromAToZ();
             }
         });
     }
-    public static void SortDates(List<String> dateList){
-        Collections.sort(dateList, new Comparator<String>() {
-            DateFormat mDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.FRANCE);
-            @Override
-            public int compare(String e1, String e2) {
-                try {
-                    return mDateFormat.parse(e1).compareTo(mDateFormat.parse(e2));
-                } catch (ParseException e) {
-                    throw  new IllegalArgumentException(e);
-                }
-            }
-        });
-    }
 
-
+    /**
+     * public  void SortDates(List<String> dateList){
+     * Collections.sort(dateList, new Comparator<String>() {
+     * DateFormat mDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.FRANCE);
+     *
+     * @Override public int compare(String e1, String e2) {
+     * try {
+     * return mDateFormat.parse(e1).compareTo(mDateFormat.parse(e2));
+     * } catch (ParseException e) {
+     * throw  new IllegalArgumentException(e);
+     * }
+     * }
+     * });
+     * }
+     **/
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
@@ -160,11 +188,9 @@ sortFromAToZ();
             case R.id.sort_By_Date:
 
                 Log.d("message", "test");
-sortList();
 
-//SortDates();
-
-            return true;
+showDateTimeDialog();
+                return true;
             case R.id.sort_By_Place:
                 Log.d("message2", "test2");
 
@@ -173,8 +199,6 @@ sortList();
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
 
 
     @Override
@@ -193,7 +217,7 @@ sortList();
     @Override
     public void onResume() {
         super.onResume();
-        initList();
+        initList(mApiService.getMeetings());
     }
 
     /**
@@ -204,7 +228,7 @@ sortList();
     @Subscribe
     public void onDeleteMeeting(DeleteMeetingEvent event) {
         mApiService.deleteMeeting(event.meeting);
-        initList();
+        initList(mApiService.getMeetings());
     }
 
     /**
@@ -215,7 +239,7 @@ sortList();
     @Subscribe
     public void onAddMeeting(AddMeetingEvent event) {
         mApiService.addMeeting(event.meeting);
-        initList();
+        initList(mApiService.getMeetings());
     }
 
 

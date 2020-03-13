@@ -40,6 +40,8 @@ public class Meeting implements Serializable {
     private String subject;
 
 
+
+
     /**
      * Entrants mails adress
      */
@@ -92,10 +94,15 @@ public class Meeting implements Serializable {
     public StringBuilder getTimeFormated() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         StringBuilder time = new StringBuilder(dateFormat.format(this.date));
+
         return time;
 
     }
 
+public String getDateFormated() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM/yyyy");
+        return  dateFormat.format(this.date);
+}
 
 
     public Integer getId() {
