@@ -4,10 +4,14 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.format.DateFormat;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,9 +57,8 @@ import static com.philippe.mareu.ui.MainActivity.BUNDLE_EXTRA_MEETING;
 public class AddMeetingFragment extends AppCompatActivity {
 
 
-
     @BindView(R.id.name_input)
-     EditText mMeetingEdit;
+    EditText mMeetingEdit;
     @BindView(R.id.entrants_input)
     EditText mEntrantEdit;
     @BindView(R.id.place_input)
@@ -70,20 +73,14 @@ public class AddMeetingFragment extends AppCompatActivity {
     private RecyclerView mRecyclerView;
 
     private List<Place> mPlaces;
-    private DatePicker mDatePicker;
-    private TimePicker mTimePicker;
-    EditText date_in;
-    EditText time_in;
+
     TextView date_time_in;
 
     Meeting mMeeting;
 
     MeetingApiService mMeetingApiService;
 
-String[] numberword = {"Peach", "Mario", "Luigi"};
-int[] numberImage = {R.drawable.ic_one, R.drawable.ic_two, R.drawable.ic_three};
-String selectedroom;
-
+    Place selectedplace;
 
 
     @Override
@@ -93,25 +90,24 @@ String selectedroom;
         ButterKnife.bind(this);
         mMeetingApiService = DI.getMeetingApiService();
         mMeeting = (Meeting) getIntent().getSerializableExtra(BUNDLE_EXTRA_MEETING);
+        mPlaces = mMeetingApiService.getPlaces();
         //MainAdapter adapter = new MainAdapter(AddMeetingFragment.this, numberword, numberImage);
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,numberword);
+        ArrayAdapter arrayAdapter = new ArrayAdapter<Place>(this, android.R.layout.simple_list_item_1, mPlaces);
         mGridView.setAdapter(arrayAdapter);
-
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedroom = numberword[+position];
-                Toast.makeText(getApplicationContext(), "You choose " + numberword[+position], Toast.LENGTH_SHORT).show();
-                mSelect_room.setText("you have chosen " + numberword[+position]);
-
+                selectedplace = mPlaces.get(+position);
+                Toast.makeText(getApplicationContext(), "You choose " + selectedplace.getName(), Toast.LENGTH_SHORT).show();
+                mSelect_room.setText("you have chosen " + selectedplace.getName());
             }
         });
 
         mOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Meeting meeting = new Meeting(1, mMeetingEdit.getText().toString(), Calendar.getInstance().getTime(), selectedroom, mEntrantEdit.getText().toString());
+                Meeting meeting = new Meeting(1, mMeetingEdit.getText().toString(), Calendar.getInstance().getTime(),selectedplace , mEntrantEdit.getText().toString());
                 EventBus.getDefault().post(new AddMeetingEvent(meeting));
             }
         });
@@ -129,9 +125,6 @@ String selectedroom;
             }
         });
     }
-
-
-
 
 
     private void showDateTimeDialog(final TextView date_time_in) {

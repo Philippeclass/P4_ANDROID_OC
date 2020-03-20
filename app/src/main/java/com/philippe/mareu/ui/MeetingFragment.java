@@ -1,8 +1,10 @@
 package com.philippe.mareu.ui;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +29,7 @@ import com.philippe.mareu.di.DI;
 import com.philippe.mareu.events.AddMeetingEvent;
 import com.philippe.mareu.events.DeleteMeetingEvent;
 import com.philippe.mareu.model.Meeting;
+import com.philippe.mareu.model.Place;
 import com.philippe.mareu.service.MeetingApiService;
 
 import org.greenrobot.eventbus.EventBus;
@@ -51,6 +54,7 @@ public class MeetingFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private MeetingRecyclerViewAdapter mAdapter;
     private Meeting mMeeting;
+    private  AddMeetingFragment mAddMeetingFragment;
 
 
     @BindView(R.id.btn_add_meeting)
@@ -77,9 +81,6 @@ public class MeetingFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mApiService = DI.getMeetingApiService();
         setHasOptionsMenu(true);
-
-
-
     }
 
 
@@ -137,13 +138,28 @@ sortFromAToZ();
                 initList(mApiService.sortByDates(simpleDateFormat.format(date)));
 
 
-
             }
         };
 
         new DatePickerDialog(getContext(), dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 
     }
+/**
+    private void showPlaceDialog() {
+        Dialog.OnClickListener PlaceListener = new Dialog.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int place) {
+
+
+                 place1 = mAddMeetingFragment.selectedplace;
+                initList(mApiService.sortByPlaces(place));
+
+            }
+        };
+
+
+    }
+**/
 
 
     /**
@@ -189,16 +205,19 @@ sortFromAToZ();
 
                 Log.d("message", "test");
 
-showDateTimeDialog();
+                showDateTimeDialog();
                 return true;
             case R.id.sort_By_Place:
                 Log.d("message2", "test2");
+
+                //showPlaceDialog();
 
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
 
     @Override

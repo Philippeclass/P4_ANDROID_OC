@@ -13,7 +13,9 @@ import java.util.List;
 public class DummyMeetingApiService implements MeetingApiService {
 
     private List<Meeting> meetings = DummyMeetingGenerator.generateMeetings();
-    private List<Place> places = DummyMeetingGenerator.generatePlaces();
+    private List<Place>  places = DummyMeetingGenerator.generatePlaces();
+
+
 
 
     /**
@@ -37,6 +39,19 @@ public class DummyMeetingApiService implements MeetingApiService {
         }
         return meetingList;
     }
+
+    @Override
+    public List<Meeting> sortByPlaces(int place) {
+        List<Meeting> meetingList2 = new ArrayList<>();
+        for (Meeting meeting : meetings) {
+            if (meeting.getPlace().equals(place)) {
+
+                meetingList2.add(meeting);
+            }
+        }
+        return meetingList2;
+    }
+
 
     @Override
     public List<Place> getPlaces() {

@@ -3,7 +3,6 @@ package com.philippe.mareu.service;
 import com.philippe.mareu.model.Meeting;
 import com.philippe.mareu.model.Place;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -20,6 +19,8 @@ import java.util.List;
         List<Meeting>getMeetings();
 
         List<Meeting>sortByDates(String date);
+
+        List<Meeting>sortByPlaces(int place);
 
         List<Place>getPlaces();
 

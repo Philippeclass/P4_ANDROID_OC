@@ -19,12 +19,6 @@
         android:text="Select meeting place"
         />
 
-<ImageView
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:id="@+id/image_view"
-
-    />
     <GridView
         android:id="@+id/place_input"
         android:layout_width="match_parent"
@@ -38,13 +32,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/select_room_message"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_view_place"
-        android:text="Room"
-        android:textSize="25dp"
-        android:layout_marginTop="5dp"/>
+
 
     <EditText
         android:layout_width="match_parent"

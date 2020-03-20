@@ -32,7 +32,7 @@ public class Meeting implements Serializable {
     /**
      * Place
      */
-    private String place;
+    private Place place;
 
     /**
      * Subject
@@ -62,7 +62,7 @@ public class Meeting implements Serializable {
      * @param entrantMail
 
      */
-    public Meeting(Integer id,String name, Date date, String place, String entrantMail
+    public Meeting(Integer id,String name, Date date, Place place, String entrantMail
     ) {
         this.id = id;
         this.name = name;
@@ -115,8 +115,8 @@ public String getDateFormated() {
     public void setName(String place) { this.name = name;}
     public Date getDate() { return date; }
     public void setDate(Date time) { this.date = date; }
-    public String getPlace() { return place; }
-    public void setPlace(String place) { this.place = place; }
+    public Place getPlace() { return place; }
+    public void setPlace(Place place) { this.place = place; }
     public String getSubject() { return subject; }
     public void setSubject(String subject) { this.subject = subject; }
     public String getEntrantMail() { return entrantMail; }

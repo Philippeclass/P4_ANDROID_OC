@@ -1,37 +1,48 @@
 package com.philippe.mareu.model;
 
+import androidx.annotation.NonNull;
+
 public class Place {
 
 
-    private int mId;
+
     private String mName;
+    private  String mcolor;
+    private int i;
+    private String peach;
+    private String mario;
+    private  String luigi;
 
 
     /**
      * Construtor
 
-     * @param id
      * @param name
      */
-    public Place(int id, String name) {
-        this.mId = id;
+    public Place(String name, String color) {
         this.mName = name;
+        this.mcolor = color;
     }
 
-
-    public int getId() {
-        return this.mId;
+    @NonNull
+    @Override
+    public String toString() {
+        return mName;
     }
 
     public String getName() {
         return this.mName;
     }
 
-    public void setId(int id) {
-        this.mId = id;
-    }
-
     public void setName(String name) {
         this.mName = name;
+    }
+
+    public String getColor() {
+        return this.mcolor;
+    }
+
+    public void setColor(String color) {
+        this.mcolor = color;
     }
 }
