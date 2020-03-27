@@ -20,7 +20,7 @@ import java.util.List;
 
         List<Meeting>sortByDates(String date);
 
-        List<Meeting>sortByPlaces(int place);
+        List<Meeting>sortByPlaces(Place place);
 
         List<Place>getPlaces();
 

@@ -91,7 +91,7 @@ public class AddMeetingFragment extends AppCompatActivity {
         mMeetingApiService = DI.getMeetingApiService();
         mMeeting = (Meeting) getIntent().getSerializableExtra(BUNDLE_EXTRA_MEETING);
         mPlaces = mMeetingApiService.getPlaces();
-        //MainAdapter adapter = new MainAdapter(AddMeetingFragment.this, numberword, numberImage);
+
         ArrayAdapter arrayAdapter = new ArrayAdapter<Place>(this, android.R.layout.simple_list_item_1, mPlaces);
         mGridView.setAdapter(arrayAdapter);
 

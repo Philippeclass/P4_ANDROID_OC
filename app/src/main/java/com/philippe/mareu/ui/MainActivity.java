@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,11 +50,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        /**
-         FragmentTransaction fragmentTransaction  = getSupportFragmentManager().beginTransaction();
-         fragmentTransaction.add(R.id.container, new Fragment());
-         fragmentTransaction.commit();
-         **/
 
 
     }
@@ -65,4 +61,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
 
     }
+
+
+ // private void showDialog() {
+ //     FragmentManager fm = getSupportFragmentManager();
+ //     MyDialogFragment showDialogFragment = MyDialogFragment.newInstance(0);
+ //     showDialogFragment.show(fm, "fragment_sort");
+ // }
+
 }

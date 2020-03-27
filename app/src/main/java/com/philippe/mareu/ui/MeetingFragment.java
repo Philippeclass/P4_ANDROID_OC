@@ -1,24 +1,19 @@
 package com.philippe.mareu.ui;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,28 +30,26 @@ import com.philippe.mareu.service.MeetingApiService;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 
-public class MeetingFragment extends Fragment {
+public class MeetingFragment extends Fragment implements MyDialogFragment.MyDialogFragmentListener {
 
     private MeetingApiService mApiService;
     private List<Meeting> mMeetings;
     private RecyclerView mRecyclerView;
     private MeetingRecyclerViewAdapter mAdapter;
     private Meeting mMeeting;
-    private  AddMeetingFragment mAddMeetingFragment;
-
-
+    private AddMeetingFragment mAddMeetingFragment;
+    private static final String TAG = "MainFragment";
+    @BindView(R.id.sort_By_Place)
+    public MenuItem mMenuItem;
     @BindView(R.id.btn_add_meeting)
     public FloatingActionButton mAddMeetingButton;
 
@@ -93,37 +86,10 @@ public class MeetingFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
-
-        /**
-         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-        @Override public void onClick(View v) {
-
-        FragmentTransaction frag = getFragmentManager().beginTransaction();
-        frag.replace(R.id.btn_add_meeting, new AddMeetingFragment());
-        frag.commit();
-        }
-        });
-         **/
-
-/**
- mSortButton.setOnClickListener(new View.OnClickListener() {
-@Override public void onClick(View v) {
-sortFromAToZ();
-
-}
-});
- **/
-        //initList();
         return view;
 
     }
 
-    /**
-     * public void sortFromAToZ() {
-     * Collections.sort(mApiService.getMeetings(), Meeting.fromAtoZ);
-     * initList();
-     * }
-     **/
 
     private void showDateTimeDialog() {
         final Calendar calendar = Calendar.getInstance();
@@ -144,30 +110,21 @@ sortFromAToZ();
         new DatePickerDialog(getContext(), dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 
     }
-/**
+
     private void showPlaceDialog() {
-        Dialog.OnClickListener PlaceListener = new Dialog.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int place) {
 
-
-                 place1 = mAddMeetingFragment.selectedplace;
-                initList(mApiService.sortByPlaces(place));
-
-            }
-        };
-
+        FragmentManager fm = getFragmentManager();
+        MyDialogFragment showDialogFragment = new MyDialogFragment();
+        showDialogFragment.setTargetFragment(MeetingFragment.this, 0);
+        showDialogFragment.show(fm, "fragment_sort");
 
     }
-**/
 
 
     /**
      * Init the List of neighbours
      */
     private void initList(List<Meeting> meetings) {
-
-        //  mMeetings = mApiService.getMeetings();
 
         mRecyclerView.setAdapter(new MeetingRecyclerViewAdapter(meetings));
 
@@ -182,21 +139,7 @@ sortFromAToZ();
         });
     }
 
-    /**
-     * public  void SortDates(List<String> dateList){
-     * Collections.sort(dateList, new Comparator<String>() {
-     * DateFormat mDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.FRANCE);
-     *
-     * @Override public int compare(String e1, String e2) {
-     * try {
-     * return mDateFormat.parse(e1).compareTo(mDateFormat.parse(e2));
-     * } catch (ParseException e) {
-     * throw  new IllegalArgumentException(e);
-     * }
-     * }
-     * });
-     * }
-     **/
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
@@ -209,15 +152,16 @@ sortFromAToZ();
                 return true;
             case R.id.sort_By_Place:
                 Log.d("message2", "test2");
-
-                //showPlaceDialog();
-
+                showPlaceDialog();
                 return true;
+
+            case R.id.reset_sort:
+                Log.d("message3", "test3");
+                initList(mApiService.getMeetings());
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 
     @Override
@@ -262,6 +206,10 @@ sortFromAToZ();
     }
 
 
+    @Override
+    public void onClickPlaceDialogCall(MyDialogFragment myDialogFragment, Place place) {
+        initList(mApiService.sortByPlaces(place));
+    }
 }
 
 

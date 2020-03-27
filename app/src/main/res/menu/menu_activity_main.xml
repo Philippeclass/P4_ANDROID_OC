@@ -20,7 +20,12 @@
 
 
             </item>
+            <item
+                android:id="@+id/reset_sort"
+                android:title="Reset sort">
 
+
+            </item>
         </menu>
 
 

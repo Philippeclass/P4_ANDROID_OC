@@ -41,7 +41,7 @@ public class DummyMeetingApiService implements MeetingApiService {
     }
 
     @Override
-    public List<Meeting> sortByPlaces(int place) {
+    public List<Meeting> sortByPlaces(Place place) {
         List<Meeting> meetingList2 = new ArrayList<>();
         for (Meeting meeting : meetings) {
             if (meeting.getPlace().equals(place)) {
