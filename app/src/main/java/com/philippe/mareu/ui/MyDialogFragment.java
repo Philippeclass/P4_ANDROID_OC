@@ -38,7 +38,7 @@ public class MyDialogFragment extends DialogFragment {
 
     public interface MyDialogFragmentListener{
         public void onClickPlaceDialogCall(MyDialogFragment myDialogFragment, Place place);
-        
+
     }
 
 MyDialogFragmentListener mListener;

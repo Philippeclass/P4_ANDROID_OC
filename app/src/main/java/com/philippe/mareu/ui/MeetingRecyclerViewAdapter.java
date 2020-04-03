@@ -56,6 +56,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         holder.mMeetingColor.getDrawable().setTint(Color.parseColor(meeting.getPlace().getColor()));
 
         holder.mplaceText.setText(meeting.getPlace().getName());
+        holder.mplaceDate.setText(meeting.getDateFormated());
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +90,8 @@ EventBus.getDefault().post(new AddMeetingEvent(meeting));
         public ImageButton mDeleteButton;
         @BindView(R.id.place_text)
         public  TextView mplaceText;
+        @BindView(R.id.place_date)
+        public  TextView mplaceDate;
 
 
         /**

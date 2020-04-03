@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -54,6 +55,10 @@ public class MeetingFragment extends Fragment implements MyDialogFragment.MyDial
     public FloatingActionButton mAddMeetingButton;
 
 
+
+    private static final String SELECTED_ITEM_POSITION = "ItemPosition";
+    private int mPosition;
+
     /**
      * Create and return a new instance
      * is created at each fragment change
@@ -74,7 +79,11 @@ public class MeetingFragment extends Fragment implements MyDialogFragment.MyDial
         super.onCreate(savedInstanceState);
         mApiService = DI.getMeetingApiService();
         setHasOptionsMenu(true);
+
+
     }
+
+
 
 
     @Override
@@ -122,7 +131,7 @@ public class MeetingFragment extends Fragment implements MyDialogFragment.MyDial
 
 
     /**
-     * Init the List of neighbours
+     * Init the List of meetings
      */
     private void initList(List<Meeting> meetings) {
 

@@ -30,7 +30,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/item_list_avatar"
         app:layout_constraintStart_toEndOf="@+id/item_list_avatar"
-        app:layout_constraintTop_toTopOf="@+id/item_list_avatar" />
+        app:layout_constraintTop_toTopOf="@+id/item_list_avatar"
+        android:layout_marginEnd="@dimen/cardview_default_radius"
+        />
+
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -40,6 +43,17 @@
     app:layout_constraintStart_toEndOf="@+id/item_list_avatar"
     android:gravity="start"
     />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="date"
+        android:id="@+id/place_date"
+        app:layout_constraintTop_toBottomOf="@id/place_text"
+        app:layout_constraintStart_toEndOf="@+id/item_list_avatar"
+        android:gravity="start"
+        />
+
     <ImageButton
         android:id="@+id/item_list_delete_button"
         android:layout_marginEnd="16dp"
