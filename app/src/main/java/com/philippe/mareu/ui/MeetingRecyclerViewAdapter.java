@@ -7,16 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.philippe.mareu.R;
 import com.philippe.mareu.events.DeleteMeetingEvent;
 import com.philippe.mareu.model.Meeting;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -48,6 +44,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         holder.mMeetingName.setText(meeting.getName() + " - " + meeting.getEntrantMail() + " - " + meeting.getTimeFormated());
         holder.mMeetingColor.getDrawable().setTint(Color.parseColor(meeting.getPlace().getColor()));
         holder.mplaceText.setText(meeting.getPlace().getName());
+        holder.mplaceDate.setText(meeting.getDateFormated());
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +70,8 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         public ImageButton mDeleteButton;
         @BindView(R.id.place_text)
         public TextView mplaceText;
+        @BindView(R.id.place_date)
+        public TextView mplaceDate;
 
 
         public ViewHolder(View view) {

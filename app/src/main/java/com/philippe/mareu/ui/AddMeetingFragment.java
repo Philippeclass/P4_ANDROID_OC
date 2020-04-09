@@ -71,7 +71,7 @@ public class AddMeetingFragment extends AppCompatActivity {
     private MeetingApiService mApiService;
     private List<Meeting> mMeetings;
     private RecyclerView mRecyclerView;
-
+    Calendar mCalendar = Calendar.getInstance();
     private List<Place> mPlaces;
 
     TextView date_time_in;
@@ -107,7 +107,8 @@ public class AddMeetingFragment extends AppCompatActivity {
         mOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Meeting meeting = new Meeting(1, mMeetingEdit.getText().toString(), Calendar.getInstance().getTime(),selectedplace , mEntrantEdit.getText().toString());
+
+                Meeting meeting = new Meeting(1, mMeetingEdit.getText().toString(), mCalendar.getTime(), selectedplace, mEntrantEdit.getText().toString());
                 EventBus.getDefault().post(new AddMeetingEvent(meeting));
             }
         });
@@ -128,34 +129,35 @@ public class AddMeetingFragment extends AppCompatActivity {
 
 
     private void showDateTimeDialog(final TextView date_time_in) {
-        final Calendar calendar = Calendar.getInstance();
+
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy HH:mm");
+                mCalendar.set(Calendar.YEAR, year);
+                mCalendar.set(Calendar.MONTH, month);
+                mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
 
                 TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        calendar.set(Calendar.MINUTE, minute);
+                       mCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        mCalendar.set(Calendar.MINUTE, minute);
 
 
-                         date_time_in.setText(simpleDateFormat.format(calendar.getTime()));
+
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy HH:mm");
+
+                        date_time_in.setText(simpleDateFormat.format(mCalendar.getTime()));
 
                     }
                 };
 
-                new TimePickerDialog(AddMeetingFragment.this, timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
+                new TimePickerDialog(AddMeetingFragment.this, timeSetListener, mCalendar.get(Calendar.HOUR_OF_DAY), mCalendar.get(Calendar.MINUTE), true).show();
             }
         };
 
-        new DatePickerDialog(AddMeetingFragment.this, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog(AddMeetingFragment.this, dateSetListener,mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
     }
 

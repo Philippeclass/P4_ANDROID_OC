@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import androidx.test.espresso.ViewInteraction;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -16,6 +15,7 @@ import com.philippe.mareu.R;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.AllOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,7 +69,7 @@ public class SortByDateInstrumentedTest {
                                         0),
                                 3)));
         appCompatButton.perform(scrollTo(), click());
-        onView(ViewMatchers.withId(R.id.list_meeting)).check(withItemCount(3));
+        onView(AllOf.allOf(withId(R.id.list_meeting), isDisplayed())).check(withItemCount(1));
     }
 
     private static Matcher<View> childAtPosition(
