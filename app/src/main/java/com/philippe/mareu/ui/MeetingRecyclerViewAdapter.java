@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,10 +26,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
 
     private final List<Meeting> mMeetings;
-    public EditText mEditText1;
-    public EditText mEditText2;
-
-
 
     @BindView(R.id.btn_add_meeting)
     public FloatingActionButton mFloatingActionButton;
@@ -46,31 +41,19 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         return new ViewHolder(view);
     }
 
-
-
+// Show Meetings
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Meeting meeting = mMeetings.get(position);
         holder.mMeetingName.setText(meeting.getName() + " - " + meeting.getEntrantMail() + " - " + meeting.getTimeFormated());
-
         holder.mMeetingColor.getDrawable().setTint(Color.parseColor(meeting.getPlace().getColor()));
-
         holder.mplaceText.setText(meeting.getPlace().getName());
-        holder.mplaceDate.setText(meeting.getDateFormated());
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
             }
         });
-
-/**
- holder.mAddMeetingButton.setOnClickListener(new View.OnClickListener() {
-@Override public void onClick(View v) {
-EventBus.getDefault().post(new AddMeetingEvent(meeting));
-}
-});
- **/
 
 
     }
@@ -89,14 +72,9 @@ EventBus.getDefault().post(new AddMeetingEvent(meeting));
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
         @BindView(R.id.place_text)
-        public  TextView mplaceText;
-        @BindView(R.id.place_date)
-        public  TextView mplaceDate;
+        public TextView mplaceText;
 
 
-        /**
-         * @BindView(R.id.btn_add_meeting) public ImageButton mAddMeetingButton;
-         **/
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

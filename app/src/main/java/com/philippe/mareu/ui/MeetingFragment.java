@@ -8,11 +8,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -40,15 +37,11 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MeetingFragment extends Fragment implements MyDialogFragment.MyDialogFragmentListener {
+public class MeetingFragment extends Fragment implements SortDialogFragment.MyDialogFragmentListener {
 
     private MeetingApiService mApiService;
     private List<Meeting> mMeetings;
     private RecyclerView mRecyclerView;
-    private MeetingRecyclerViewAdapter mAdapter;
-    private Meeting mMeeting;
-    private AddMeetingFragment mAddMeetingFragment;
-    private static final String TAG = "MainFragment";
     @BindView(R.id.sort_By_Place)
     public MenuItem mMenuItem;
     @BindView(R.id.btn_add_meeting)
@@ -123,7 +116,7 @@ public class MeetingFragment extends Fragment implements MyDialogFragment.MyDial
     private void showPlaceDialog() {
 
         FragmentManager fm = getFragmentManager();
-        MyDialogFragment showDialogFragment = new MyDialogFragment();
+        SortDialogFragment showDialogFragment = new SortDialogFragment();
         showDialogFragment.setTargetFragment(MeetingFragment.this, 0);
         showDialogFragment.show(fm, "fragment_sort");
 
@@ -216,7 +209,7 @@ public class MeetingFragment extends Fragment implements MyDialogFragment.MyDial
 
 
     @Override
-    public void onClickPlaceDialogCall(MyDialogFragment myDialogFragment, Place place) {
+    public void onClickPlaceDialogCall(SortDialogFragment sortDialogFragment, Place place) {
         initList(mApiService.sortByPlaces(place));
     }
 }

@@ -8,10 +8,7 @@ public class Place {
 
     private String mName;
     private  String mcolor;
-    private int i;
-    private String peach;
-    private String mario;
-    private  String luigi;
+
 
 
     /**

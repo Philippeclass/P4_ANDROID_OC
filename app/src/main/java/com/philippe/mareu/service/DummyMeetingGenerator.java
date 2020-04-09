@@ -2,7 +2,6 @@ package com.philippe.mareu.service;
 
 import com.philippe.mareu.model.Meeting;
 import com.philippe.mareu.model.Place;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;

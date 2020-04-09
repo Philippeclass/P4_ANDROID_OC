@@ -4,9 +4,7 @@ import com.philippe.mareu.model.Meeting;
 
 public class AddMeetingEvent {
 
-    /**
-     * Neighbour to delete
-     */
+
     public Meeting meeting;
 
     /**

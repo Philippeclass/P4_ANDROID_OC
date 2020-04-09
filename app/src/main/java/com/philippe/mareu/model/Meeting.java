@@ -35,21 +35,9 @@ public class Meeting implements Serializable {
     private Place place;
 
     /**
-     * Subject
-     */
-    private String subject;
-
-
-
-
-    /**
      * Entrants mails adress
      */
     private String entrantMail;
-
-    /**
-     * AvatarColor
-     */
 
 
     /**
@@ -117,8 +105,6 @@ public String getDateFormated() {
     public void setDate(Date time) { this.date = date; }
     public Place getPlace() { return place; }
     public void setPlace(Place place) { this.place = place; }
-    public String getSubject() { return subject; }
-    public void setSubject(String subject) { this.subject = subject; }
     public String getEntrantMail() { return entrantMail; }
     public void setEntrantMails(String entrantMail) { this.entrantMail = entrantMail; }
 

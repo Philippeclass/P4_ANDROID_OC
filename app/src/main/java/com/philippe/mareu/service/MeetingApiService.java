@@ -7,7 +7,7 @@ import java.util.List;
 
 
     /**
-     * Meetingr API client
+     * Meeting API client
      */
     public interface MeetingApiService {
 
@@ -26,7 +26,7 @@ import java.util.List;
 
 
         /**
-         * Deletes a neighbour
+         * Deletes a meeting
          *
          * @param meeting
          */

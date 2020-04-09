@@ -3,14 +3,14 @@ package com.philippe.mareu.events;
 import com.philippe.mareu.model.Meeting;
 
 /**
- * Event fired when a user deletes a Neighbour
+ * Event fired when a user deletes a Meeting
  */
 public class DeleteMeetingEvent {
 
 
 
         /**
-         * Neighbour to delete
+         * Meeting to delete
          */
         public Meeting meeting;
 

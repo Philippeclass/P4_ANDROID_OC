@@ -37,7 +37,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="entrants"
+        android:hint="Entrants"
         android:id="@+id/entrants_input"
         android:inputType="none" />
 
