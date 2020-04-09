@@ -39,7 +39,7 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class ExampleInstrumentedTest {
+public class MaReuInstrumentedTest {
 
     private MeetingApiService service;
     private MainActivity mActivity;
@@ -63,7 +63,7 @@ public class ExampleInstrumentedTest {
      * We ensure that our recyclerview is displaying at least on item
      */
     @Test
-    public void myNeighboursList_shouldNotBeEmpty() {
+    public void Meeting_List_shouldNotBeEmpty() {
         // First scroll to the position that needs to be matched and
         onView(AllOf.allOf(ViewMatchers.withId(R.id.list_meeting), isDisplayed()))
                 .check(matches(hasMinimumChildCount(1)));
@@ -74,7 +74,7 @@ public class ExampleInstrumentedTest {
      * When we delete an item, the item is no more shown
      */
     @Test
-    public void myNeighboursList_deleteAction_shouldRemoveItem() {
+    public void MeetingList_deleteAction_shouldRemoveItem() {
         // Given : We remove the element at position 2
         onView(allOf(withId(R.id.list_meeting), isDisplayed())).check(withItemCount(ITEMS_COUNT));
         // When perform a click on a delete icon

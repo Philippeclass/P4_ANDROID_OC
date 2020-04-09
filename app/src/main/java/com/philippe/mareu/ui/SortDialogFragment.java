@@ -20,11 +20,11 @@ import java.util.List;
 import static org.greenrobot.eventbus.EventBus.TAG;
 
 
-public class MyDialogFragment extends DialogFragment {
+public class SortDialogFragment extends DialogFragment {
 
 
     public interface MyDialogFragmentListener{
-        public void onClickPlaceDialogCall(MyDialogFragment myDialogFragment, Place place);
+        public void onClickPlaceDialogCall(SortDialogFragment sortDialogFragment, Place place);
 
     }
 
@@ -45,8 +45,8 @@ MyDialogFragmentListener mListener;
     MeetingApiService mMeetingApiService;
 
 
-    public static MyDialogFragment newInstance(int title) {
-        MyDialogFragment dialog = new MyDialogFragment();
+    public static SortDialogFragment newInstance(int title) {
+        SortDialogFragment dialog = new SortDialogFragment();
         Bundle args = new Bundle();
         args.putInt("title", title);
         dialog.setArguments(args);
@@ -78,7 +78,7 @@ MyDialogFragmentListener mListener;
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectedplace = mPlaces.get(+position);
                 mMeetingApiService.sortByPlaces(selectedplace);
-                mListener.onClickPlaceDialogCall(MyDialogFragment.this, selectedplace);
+                mListener.onClickPlaceDialogCall(SortDialogFragment.this, selectedplace);
                 getDialog().dismiss();
 
 

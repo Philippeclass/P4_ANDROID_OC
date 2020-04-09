@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class MaReuUnitTest {
 
     private MeetingApiService service;
 
@@ -37,16 +37,16 @@ public class ExampleUnitTest {
 
     @Test
     public void getMeetingWithSuccess() {
-        List<Meeting> neighbours = service.getMeetings();
-        List<Meeting> expectedNeighbours = DummyMeetingGenerator.DUMMY_MEETING;
-        assertThat(neighbours, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedNeighbours.toArray()));
+        List<Meeting> meetings = service.getMeetings();
+        List<Meeting> expectedMeetings = DummyMeetingGenerator.DUMMY_MEETING;
+        assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedMeetings.toArray()));
     }
 
     @Test
     public void deleteMeetingWithSuccess() {
-        Meeting neighbourToDelete = service.getMeetings().get(0);
-        service.deleteMeeting(neighbourToDelete);
-        assertFalse(service.getMeetings().contains(neighbourToDelete));
+        Meeting meetingsToDelete = service.getMeetings().get(0);
+        service.deleteMeeting(meetingsToDelete);
+        assertFalse(service.getMeetings().contains(meetingsToDelete));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void sortVyPlacesgWithSucess () {
+    public void sortByPlacesWithSucess () {
         List<Meeting> meetingList  = service.sortByPlaces(service.getPlaces().get(0));
         for (Meeting meeting : meetingList) {
             assertEquals(service.getPlaces().get(0),meeting.getPlace());
